@@ -1,7 +1,8 @@
 package vn.DoThanhTai.laptopshop.controller.admin;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -17,7 +18,8 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public String getMethodName() {
+    public String getHomePage(Model model) {
+        model.addAttribute("username", "tai");
         return this.userService.getUserName();
     }
 
