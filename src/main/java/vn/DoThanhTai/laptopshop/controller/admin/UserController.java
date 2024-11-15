@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     private final UserService userService;
-    private final UserRepository userRepository;
 
     public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/")
@@ -39,8 +37,7 @@ public class UserController {
 
     @PostMapping("/admin/user/create")
     public String postCreateUser(Model model, @ModelAttribute("newUser") User newUser) {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>"+newUser);
-        this.userRepository.save(newUser);
+        this.userService.handleSaveUser(newUser);
         return  "hello";
     }
     
