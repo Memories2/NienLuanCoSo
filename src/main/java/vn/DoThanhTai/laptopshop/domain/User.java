@@ -1,6 +1,17 @@
 package vn.DoThanhTai.laptopshop.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity // Biến class này thành một entity (một bảng trong database)
+@Table(name = "users") // Đặt tên bảng trong database
 public class User {
+
+    @Id // Đánh dấu thuộc tính id là primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Tự động tăng giá trị của id
     private long id;
     private String email;
     private String password;
