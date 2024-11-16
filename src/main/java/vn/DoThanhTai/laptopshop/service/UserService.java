@@ -1,5 +1,7 @@
 package vn.DoThanhTai.laptopshop.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import vn.DoThanhTai.laptopshop.domain.User;
@@ -21,5 +23,14 @@ public class UserService {
         return this.userRepository.save(user);
 
     }
+
+    public List<User> handleGetAllUsers() {
+        return this.userRepository.findAll();
+    }
+
+    public User handleGetUserById(Long id) {
+        return this.userRepository.findById(id).orElse(null);
+    }
+  
     
 }
