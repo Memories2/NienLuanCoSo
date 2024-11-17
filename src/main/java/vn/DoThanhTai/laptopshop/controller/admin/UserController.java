@@ -22,6 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    ///////////////////////// All User View //////////////////////////
     @GetMapping("/admin/user/show")
     public String getHomePage(Model model) {
         List<User> users = this.userService.handleGetAllUsers();
@@ -29,6 +30,7 @@ public class UserController {
         return "/admin/user/show";
     }
 
+    ///////////////////////// Create User //////////////////////////
     @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User()); // Bắt buộc phải có để tránh lỗi
@@ -43,6 +45,7 @@ public class UserController {
         // return "redirect:show"; // Chuyển hướng về trang show Cách 2 sử dụng tên file
     }
 
+    ///////////////////////// View User Detail //////////////////////////
     @GetMapping("/admin/user/view/{id}") // Get xem chi tiết một user
     public String getViewUserPage(Model model, @PathVariable("id") Long id) {
         User user = this.userService.handleGetUserById(id);
@@ -50,6 +53,43 @@ public class UserController {
         model.addAttribute("id", id);
         return "admin/user/detail";
     }
+
+    ///////////////////////// Update User //////////////////////////
+
+    @GetMapping("/admin/user/update/{id}")
+    public String getUpdaterUserPage(Model model, @PathVariable("id") Long id) {
+        User currentUser = this.userService.handleGetUserById(id);
+        model.addAttribute("currentUser", currentUser);
+        return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update")
+    public String postUpdateUser(Model model, @ModelAttribute("currentUser") User currentUser) {
+        User oldUser = this.userService.handleGetUserById(currentUser.getId());
+        if (oldUser != null) {
+            oldUser.setFullName(currentUser.getFullName());
+            oldUser.setPhone(currentUser.getPhone());
+            oldUser.setAddress(currentUser.getAddress());
+            this.userService.handleUpdateUser(oldUser);
+        }
+        return "redirect:/admin/user/show";
+    }
+
+    ///////////////////////// Delete User //////////////////////////
+
+    @GetMapping("/admin/user/delete/{id}")
+    public String getDeleteUserPage(Model model, @PathVariable("id") Long id) {
+        User currentUser = this.userService.handleGetUserById(id);
+        model.addAttribute("currentUser", currentUser);
+        return "admin/user/delete";
+    }
+
+    @PostMapping("/admin/user/delete")
+    public String postDeleteUser(Model model, @ModelAttribute("currentUser") User currentUser) {
+        User oldUser = this.userService.handleGetUserById(currentUser.getId());
+        if (oldUser != null) {
+            this.userService.handleDeleteUser(oldUser.getId());
+        }
+        return "redirect:/admin/user/show";
+    }
 }
-
-
