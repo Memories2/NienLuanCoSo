@@ -23,7 +23,7 @@ public class UserController {
     }
 
     ///////////////////////// All User View //////////////////////////
-    @GetMapping("/admin/user/show")
+    @GetMapping("/admin/user")
     public String getHomePage(Model model) {
         List<User> users = this.userService.handleGetAllUsers();
         model.addAttribute("users", users);
@@ -41,7 +41,7 @@ public class UserController {
     @PostMapping("/admin/user/create")
     public String postCreateUser(Model model, @ModelAttribute("newUser") User newUser) {
         this.userService.handleSaveUser(newUser);
-        return "redirect:/admin/user/show"; // Chuyển hướng về trang chủ Cách 1 sử dụng URL
+        return "redirect:/admin/user"; // Chuyển hướng về trang chủ Cách 1 sử dụng URL
         // return "redirect:show"; // Chuyển hướng về trang show Cách 2 sử dụng tên file
     }
 
