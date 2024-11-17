@@ -43,10 +43,11 @@ public class UserController {
         // return "redirect:show"; // Chuyển hướng về trang show Cách 2 sử dụng tên file
     }
 
-    @GetMapping("/admin/user/view/{id}")
+    @GetMapping("/admin/user/view/{id}") // Get xem chi tiết một user
     public String getViewUserPage(Model model, @PathVariable("id") Long id) {
         User user = this.userService.handleGetUserById(id);
         model.addAttribute("user", user);
+        model.addAttribute("id", id);
         return "admin/user/detail";
     }
 }

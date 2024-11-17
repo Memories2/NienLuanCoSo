@@ -4,11 +4,11 @@
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Hỏi Dân IT 2024</div>
+                    <div class="text-muted">Copyright &copy; </div>
                     <div>
-                        <a href="https://hoidanit.vn/" target="_blank">Website</a>
+                        <a href="#" target="_blank">Niên Luận Cơ sở</a>
                         &middot;
-                        <a href="https://www.youtube.com/@hoidanit" target="_blank">Youtube channel</a>
+                        <a href="#" target="_blank">Sever side renaring</a>
                     </div>
                 </div>
             </div>

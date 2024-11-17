@@ -24,15 +24,11 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Order
                         </a>
-
-
-
-
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Hỏi Dân IT
+    
                 </div>
             </nav>
         </div>
