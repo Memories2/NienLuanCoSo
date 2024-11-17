@@ -1,5 +1,7 @@
 package vn.DoThanhTai.laptopshop.domain;
 
+import java.util.List;
+
 import org.antlr.v4.runtime.misc.NotNull;
 
 import jakarta.persistence.Column;
@@ -7,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,35 +19,33 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-  
-    private String name;
 
+    private String name;
 
     private double price;
 
     private String image;
 
-  
     private String detailDesc;
 
-  
     private String shortDesc;
 
- 
     private long quantity;
-    
+
     private long sold;
     private String factory;
     private String target;
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetail> orderDetails;
 
     public long getId() {
         return id;
     }
 
-   
     public void setId(long id) {
         this.id = id;
-    }
+    }  
 
     public String getName() {
         return name;
