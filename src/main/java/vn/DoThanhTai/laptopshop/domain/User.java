@@ -57,6 +57,16 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    
+    // Getter và Setter phải có kiểu dữ liệu đồng nhất
+    public Role getRole() {
+        return role;
+    }
+
 
     public long getId() {
         return id;
@@ -81,6 +91,8 @@ public class User {
     public String getPhone() {
         return phone;
     }
+
+    
 
     @Override
     public String toString() {
