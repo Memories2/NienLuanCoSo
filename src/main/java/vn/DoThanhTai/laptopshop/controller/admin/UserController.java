@@ -34,7 +34,6 @@ public class UserController {
     @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User()); // Bắt buộc phải có để tránh lỗi
-        model.addAttribute("username", "tai");
         return "admin/user/create";
     }
 
