@@ -10,7 +10,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="Hỏi Dân IT - Dự án laptopshop" />
                 <meta name="author" content="Hỏi Dân IT" />
-                <title>Update User </title>
+                <title>Update User - Hỏi Dân IT</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -62,7 +62,7 @@
                                                     <form:input type="text" class="form-control" path="address" />
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary">update</button>
+                                                <button type="submit" class="btn btn-warning">Update</button>
                                             </form:form>
                                         </div>
 
