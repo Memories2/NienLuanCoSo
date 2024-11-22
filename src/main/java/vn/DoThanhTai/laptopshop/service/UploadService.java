@@ -45,5 +45,11 @@ public class UploadService {
         return finalName;
     }
 
+    public void handleDeleteImage(String targetFolder, String imageName) {
+        String rootPath = this.servletContext.getRealPath("/resources/images");
+        File file = new File(rootPath + File.separator + targetFolder + File.separator + imageName);
+        if (file.exists())
+            file.delete();
+    }
 }
 

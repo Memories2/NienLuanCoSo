@@ -86,6 +86,10 @@ public class ProductController {
         if(productUpdate != null) {
             //upload file
             if(file != null && !file.isEmpty()) {
+                //delete old image
+                this.uploadService.handleDeleteImage("product", productUpdate.getImage());
+
+                //upload new image
                 String img = this.uploadService.handleSaveUploadFile(file, "product");
                 productUpdate.setImage(img);
             }
