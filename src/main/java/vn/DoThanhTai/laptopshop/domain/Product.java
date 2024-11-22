@@ -37,6 +37,14 @@ public class Product {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
 
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
     @NotEmpty(message = "Không được để trống short description")
     private String shortDesc;
 
