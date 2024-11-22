@@ -2,6 +2,7 @@ package vn.DoThanhTai.laptopshop.domain;
 
 import java.util.List;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,6 +11,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity // Biến class này thành một entity (một bảng trong database)
 @Table(name = "users") // Đặt tên bảng trong database
@@ -18,11 +23,26 @@ public class User {
     @Id // Đánh dấu thuộc tính id là primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Tự động tăng giá trị của id
     private long id;
+
+    @NotNull 
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
+
+    @NotNull
+    @Size(min = 2, message = "Password phải có tối thiểu 2 ký tự")
     private String password;
+
+    @NotNull
+    @Size(min = 3, message = "Tên phải có tối thiểu 3 ký tự")
     private String fullName;
+
+    @NotBlank(message = "Địa chỉ không được để trống")
     private String address;
+
+    @NotNull(message = "Số điện thoại không được để trống")
+    @Size(min = 10, message = "Số điện thoại phải có tối thiểu 10 ký tự")
     private String phone;
+
     private String avatar;
 
     // kết nối quan hệ một chiều nhiều người dùng có thể có một role giống nhau

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,8 @@ import vn.DoThanhTai.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
@@ -46,7 +50,17 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String postCreateUser(Model model, @ModelAttribute("newUser") User newUser, @RequestParam("hoidanitFile") MultipartFile file) {
+    public String postCreateUser(Model model, @ModelAttribute("newUser") @Valid User newUser, BindingResult newUserBindingResult, @RequestParam("hoidanitFile") MultipartFile file) {
+
+        //validate
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        for(FieldError error : errors){
+            System.out.println(error.getField() + " - " + error.getDefaultMessage());
+        }
+        
+        if(newUserBindingResult.hasErrors()){
+            return "admin/user/create";
+        }
         
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassWord = this.passwordEncoder.encode(newUser.getPassword());
@@ -107,6 +121,6 @@ public class UserController {
         if (oldUser != null) {
             this.userService.handleDeleteUser(oldUser.getId());
         }
-        return "redirect:/admin/user/show";
+        return "redirect:/admin/user";
     }
 }
