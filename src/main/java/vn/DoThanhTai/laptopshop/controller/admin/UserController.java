@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import vn.DoThanhTai.laptopshop.domain.Role;
 import vn.DoThanhTai.laptopshop.domain.User;
 import vn.DoThanhTai.laptopshop.service.UploadService;
 import vn.DoThanhTai.laptopshop.service.UserService;
@@ -47,11 +48,13 @@ public class UserController {
     @PostMapping("/admin/user/create")
     public String postCreateUser(Model model, @ModelAttribute("newUser") User newUser, @RequestParam("hoidanitFile") MultipartFile file) {
         
-   
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassWord = this.passwordEncoder.encode(newUser.getPassword());
+
         newUser.setPassword(hashPassWord);
         newUser.setAvatar(avatar);
+        newUser.setRole(this.userService.getRoleByName(newUser.getRole().getName()));
+       
         this.userService.handleSaveUser(newUser);
         return "redirect:/admin/user"; // Chuyển hướng về trang chủ Cách 1 sử dụng URL
         // return "redirect:show"; // Chuyển hướng về trang show Cách 2 sử dụng tên file
