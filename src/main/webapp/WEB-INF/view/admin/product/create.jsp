@@ -100,7 +100,7 @@
 
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Quantity:</label>
-                                                    <form:input type="quantity" class="form-control ${not empty errorsQuantity ? 'is-invalid':''}" path="quantity" />
+                                                    <form:input type="quantity"  class="form-control ${not empty errorsQuantity ? 'is-invalid':''}" path="quantity" />
                                                     ${errorsQuantity}
                                                 </div>
 

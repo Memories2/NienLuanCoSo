@@ -52,7 +52,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:forEach var="product" items="${products1}">
+                                                <c:forEach var="product" items="${products}">
                                                     <tr>
                                                         <th>${product.id}</th>
                                                         <th>${product.name}</th>

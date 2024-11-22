@@ -2,8 +2,6 @@ package vn.DoThanhTai.laptopshop.domain;
 
 import java.util.List;
 
-import org.antlr.v4.runtime.misc.NotNull;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +9,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "products")
@@ -20,16 +22,26 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+   
+    @NotNull
+    @NotEmpty(message = "Name không được để trống")
     private String name;
 
+    @DecimalMin(value = "0",inclusive= false ,message = "Price phải lớn hơn 0")    
     private double price;
 
     private String image;
 
+    @NotNull
+    @NotEmpty(message = "detailDesc không được để trống")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
 
+    @NotEmpty(message = "Không được để trống short description")
     private String shortDesc;
 
+    @NotNull
+    @Min(value = 1, message = "Số lượng phải lớn hơn 0")
     private long quantity;
 
     private long sold;
