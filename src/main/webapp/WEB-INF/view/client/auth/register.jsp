@@ -42,6 +42,10 @@
                                                     <c:set var="errorEmail">
                                                         <form:errors path="email" cssClass="invalid-feedback" />
                                                     </c:set>
+                                                    
+                                                    <c:set var="errorPhone">
+                                                        <form:errors path="phone" cssClass="invalid-feedback" />
+                                                    </c:set>
 
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
@@ -55,6 +59,7 @@
                                                                 ${errorfirstName}
                                                             </div>
                                                         </div>
+
                                                         <div class="col-md-6">
                                                             <div class="form-floating">
                                                                 <form:input class="form-control" type="text"
@@ -64,13 +69,40 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-floating mb-3">
-                                                        <form:input
-                                                            class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
-                                                            type="email" placeholder="name@example.com" path="email" />
-                                                        <label>Email address</label>
-                                                        ${errorEmail}
+
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-6">
+                                                            <div class="form-floating mb-3 mb-md-0">
+                                                                <form:input class="form-control ${not empty errorEmail ? 'is-invalid' : ''}" type="email"
+                                                                    placeholder="name@example.com" path="email" />
+                                                            <label>Email address</label>
+                                                                ${errorEmail}
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-floating mb-3 mb-md-0">
+                                                                <form:input class="form-control ${not empty errorPhone ? 'is-invalid' : ''}" type="text"
+                                                                    placeholder="Enter your phone number" path="phone" />
+                                                                <label for="inputPhone">Phone number</label>
+                                                                ${errorPhone}
+                                                            </div>  
+                                                        </div>
+
                                                     </div>
+                                                   
+
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-12">
+                                                            <div class="form-floating mb-3 mb-md-0">
+                                                                <form:input class="form-control ${not empty errorAddress ? 'is-invalid' : ''}" type="text"
+                                                                    placeholder="Enter your address" path="address" />
+                                                                <label>Address</label>
+                                                                ${errorAddress}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
                                                             <div class="form-floating mb-3 mb-md-0">

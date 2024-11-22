@@ -7,21 +7,38 @@ import jakarta.validation.constraints.Size;
 // @RegisterChecked
 public class RegisterDTO {
 
-    @Size(min=3,message = "FirstName phải có tối thiểu 3 ký tự")
+    // @Size(min=3,message = "FirstName phải có tối thiểu 3 ký tự")
     private String firstName;
 
 
     private String lastName;
 
-    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    // @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
 
     private String password;
 
-    @Size(min=3,message = "ConfirmPassword phải có tối thiểu 3 ký tự")
+    // @Size(min=3,message = "ConfirmPassword phải có tối thiểu 3 ký tự")
     private String confirmPassword;
-    
+
+    private String phone;
+
+    private String address;
+
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getFirstName() {
         return firstName;
     }
