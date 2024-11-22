@@ -4,22 +4,28 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.DoThanhTai.laptopshop.domain.User;
 import vn.DoThanhTai.laptopshop.repository.UserRepository;
+import vn.DoThanhTai.laptopshop.service.UploadService;
 import vn.DoThanhTai.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UserController {
 
     private final UserService userService;
+    private final UploadService uploadService;
 
-    public UserController(UserService userService, UserRepository userRepository) {
+    public UserController(UserService userService, UploadService uploadService) {
         this.userService = userService;
+        this.uploadService = uploadService;
     }
 
     ///////////////////////// All User View //////////////////////////
@@ -38,7 +44,12 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String postCreateUser(Model model, @ModelAttribute("newUser") User newUser) {
+    public String postCreateUser(Model model, @ModelAttribute("newUser") User newUser, @RequestParam("hoidanitFile") MultipartFile file) {
+        
+   
+        String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+       
+
         this.userService.handleSaveUser(newUser);
         return "redirect:/admin/user"; // Chuyển hướng về trang chủ Cách 1 sử dụng URL
         // return "redirect:show"; // Chuyển hướng về trang show Cách 2 sử dụng tên file
