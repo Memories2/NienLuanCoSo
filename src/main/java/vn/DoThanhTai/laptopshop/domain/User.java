@@ -23,7 +23,6 @@ public class User {
     private String fullName;
     private String address;
     private String phone;
-
     private String avatar;
 
     // kết nối quan hệ một chiều nhiều người dùng có thể có một role giống nhau
@@ -61,7 +60,14 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
     
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
     // Getter và Setter phải có kiểu dữ liệu đồng nhất
     public Role getRole() {
         return role;
@@ -91,8 +97,14 @@ public class User {
     public String getPhone() {
         return phone;
     }
-
     
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
 
     @Override
     public String toString() {

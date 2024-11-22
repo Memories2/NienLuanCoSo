@@ -2,15 +2,14 @@ package vn.DoThanhTai.laptopshop.controller.admin;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.DoThanhTai.laptopshop.domain.User;
-import vn.DoThanhTai.laptopshop.repository.UserRepository;
 import vn.DoThanhTai.laptopshop.service.UploadService;
 import vn.DoThanhTai.laptopshop.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,10 +21,12 @@ public class UserController {
 
     private final UserService userService;
     private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, UploadService uploadService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     ///////////////////////// All User View //////////////////////////
@@ -48,8 +49,9 @@ public class UserController {
         
    
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
-       
-
+        String hashPassWord = this.passwordEncoder.encode(newUser.getPassword());
+        newUser.setPassword(hashPassWord);
+        newUser.setAvatar(avatar);
         this.userService.handleSaveUser(newUser);
         return "redirect:/admin/user"; // Chuyển hướng về trang chủ Cách 1 sử dụng URL
         // return "redirect:show"; // Chuyển hướng về trang show Cách 2 sử dụng tên file
