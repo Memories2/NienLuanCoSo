@@ -36,11 +36,9 @@ public class User {
     @Size(min = 3, message = "Tên phải có tối thiểu 3 ký tự")
     private String fullName;
 
-    @NotBlank(message = "Địa chỉ không được để trống")
+   
     private String address;
 
-    @NotNull(message = "Số điện thoại không được để trống")
-    @Size(min = 10, message = "Số điện thoại phải có tối thiểu 10 ký tự")
     private String phone;
 
     private String avatar;
