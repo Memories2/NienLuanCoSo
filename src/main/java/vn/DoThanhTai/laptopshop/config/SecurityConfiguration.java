@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import jakarta.servlet.DispatcherType;
 import vn.DoThanhTai.laptopshop.service.CustomUserDetailsService;
 import vn.DoThanhTai.laptopshop.service.UserService;
 
@@ -55,40 +56,40 @@ public class SecurityConfiguration {
     //     return rememberMeServices;
     // }
 
-    // @Bean
-    // SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    //     // v6. lamda
-    //     http
-    //             .authorizeHttpRequests(authorize -> authorize
-    //                     .dispatcherTypeMatchers(DispatcherType.FORWARD,
-    //                             DispatcherType.INCLUDE)
-    //                     .permitAll()
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // v6. lamda
+        http
+                .authorizeHttpRequests(authorize -> authorize
+                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                                DispatcherType.INCLUDE)
+                        .permitAll()
 
-    //                     .requestMatchers("/", "/login", "/product/**",
-    //                             "/client/**", "/css/**", "/js/**", "/images/**", "/register")
-    //                     .permitAll()
+                        .requestMatchers("/", "/login", "/product/**",
+                                "/client/**", "/css/**", "/js/**", "/images/**", "/register")
+                        .permitAll()
 
-    //                     .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
 
-    //                     .anyRequest().authenticated())
+                        .anyRequest().authenticated())
 
-    //             .sessionManagement((sessionManagement) -> sessionManagement
-    //                     .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-    //                     .invalidSessionUrl("/logout?expired")
-    //                     .maximumSessions(1)
-    //                     .maxSessionsPreventsLogin(false))
+                .sessionManagement((sessionManagement) -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .invalidSessionUrl("/logout?expired")
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false))
 
-    //             .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
 
-    //             .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
-    //             .formLogin(formLogin -> formLogin
-    //                     .loginPage("/login")
-    //                     .failureUrl("/login?error")
-    //                     .successHandler(customSuccessHandler())
-    //                     .permitAll())
-    //             .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
+                // .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/login?error")
+                        // .successHandler(customSuccessHandler())
+                        .permitAll())
+                .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
 
-    //     return http.build();
-    // }
+        return http.build();
+    }
     
 }
