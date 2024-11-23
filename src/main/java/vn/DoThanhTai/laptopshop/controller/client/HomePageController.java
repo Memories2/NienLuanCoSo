@@ -38,6 +38,7 @@ public class HomePageController {
     public String getHomePage(Model model) {
         List<Product> products = productService.getAllProduct();
         model.addAttribute("products", products);
+       // HttpSession session = request.getSession(false);
         return "client/homepage/show";
     }
 

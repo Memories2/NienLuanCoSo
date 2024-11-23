@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 import jakarta.servlet.DispatcherType;
 import vn.DoThanhTai.laptopshop.service.CustomUserDetailsService;
@@ -47,14 +48,14 @@ public class SecurityConfiguration {
         return new CustomSuccessHandler();
     }
 
-    // @Bean
-    // public SpringSessionRememberMeServices rememberMeServices() {
-    //     SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
-    //     // optionally customize
-    //     rememberMeServices.setAlwaysRemember(true);
+    @Bean
+    public SpringSessionRememberMeServices rememberMeServices() {
+        SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
+        // optionally customize
+        rememberMeServices.setAlwaysRemember(true);
 
-    //     return rememberMeServices;
-    // }
+        return rememberMeServices;
+    }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -81,7 +82,7 @@ public class SecurityConfiguration {
 
                 .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
 
-                // .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+                 .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login?error")
