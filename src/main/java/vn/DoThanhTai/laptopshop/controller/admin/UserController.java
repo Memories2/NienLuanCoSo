@@ -39,7 +39,7 @@ public class UserController {
     public String getHomePage(Model model) {
         List<User> users = this.userService.handleGetAllUsers();
         model.addAttribute("users", users);
-        return "/admin/user/show";
+        return "admin/user/show";
     }
 
     ///////////////////////// Create User //////////////////////////

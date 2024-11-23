@@ -42,10 +42,10 @@ public class SecurityConfiguration {
         return authProvider;
     }
 
-    // @Bean
-    // public AuthenticationSuccessHandler customSuccessHandler() {
-    //     return new CustomSuccessHandler();
-    // }
+    @Bean
+    public AuthenticationSuccessHandler customSuccessHandler() {
+        return new CustomSuccessHandler();
+    }
 
     // @Bean
     // public SpringSessionRememberMeServices rememberMeServices() {
@@ -85,7 +85,7 @@ public class SecurityConfiguration {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login?error")
-                        // .successHandler(customSuccessHandler())
+                        .successHandler(customSuccessHandler())
                         .permitAll())
                 .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
 
