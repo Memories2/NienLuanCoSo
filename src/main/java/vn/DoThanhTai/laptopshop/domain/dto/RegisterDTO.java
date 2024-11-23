@@ -17,10 +17,10 @@ public class RegisterDTO {
     @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
 
-
+    @Size(min = 3, message = "Password phải có tối thiểu 3 ký tự")
     private String password;
 
-    @Size(min=3,message = "ConfirmPassword phải có tối thiểu 3 ký tự")
+    
     private String confirmPassword;
 
     @NotNull(message = "Số điện thoại không được để trống")
@@ -31,6 +31,7 @@ public class RegisterDTO {
     private String address;
 
     public String getPhone() {
+
         return phone;
     }
     public void setPhone(String phone) {

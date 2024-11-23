@@ -33,7 +33,7 @@
                                                         <form:errors path="firstName" cssClass="invalid-feedback" />
                                                     </c:set>
 
-                                                    <c:set var="errorPassword">
+                                                    <c:set var="errorConfirmPassword">
                                                         <form:errors path="confirmPassword"
                                                             cssClass="invalid-feedback" />
                                                     </c:set>
@@ -48,6 +48,10 @@
 
                                                     <c:set var="errorAddress">
                                                         <form:errors path="address" cssClass="invalid-feedback" />
+                                                    </c:set>
+
+                                                    <c:set var="errorPassword">
+                                                        <form:errors path="password" cssClass="invalid-feedback" />
                                                     </c:set>
                                                     
                                                     <div class="row mb-3">
@@ -119,12 +123,13 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-floating mb-3 mb-md-0">
-                                                                <form:input class="form-control"
+                                                                <form:input class="form-control ${not empty errorConfirmPassword ? 'is-invalid' : ''}"
                                                                     id="inputPasswordConfirm" type="password"
                                                                     placeholder="Confirm password"
                                                                     path="confirmPassword" />
                                                                 <label for="inputPasswordConfirm">Confirm
                                                                     Password</label>
+                                                                ${errorConfirmPassword}
                                                             </div>
                                                         </div>
                                                     </div>

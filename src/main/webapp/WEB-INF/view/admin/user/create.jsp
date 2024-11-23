@@ -98,16 +98,7 @@
                                                 </div>
 
 
-                                                <div class="mb-3 col-12">
-                                                    <label class="form-label">Address:</label>
-                                                    <c:set var="errorAddress">
-                                                        <form:errors path="address" cssClass="invalid-feedback" />
-                                                    </c:set>
-                                                    <form:input type="text"
-                                                        class="form-control ${not empty errorAddress? 'is-invalid':''}"
-                                                        path="address" />
-                                                    ${errorAddress}
-                                                </div>
+                            
 
 
                                                 <div class="mb-3 col-12 col-md-6">
