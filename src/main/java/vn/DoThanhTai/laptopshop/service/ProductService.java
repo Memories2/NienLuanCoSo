@@ -54,7 +54,11 @@ public class ProductService {
         this.productRepository.deleteById(id);
     }
 
-    // handle logic add Cart and CartDetail
+    //////////////////////////////// cart logic ////////////////////////////////
+    public Cart fetchByUser(User user) {
+        return this.cartRepository.findByUser(user);
+
+    }
     public void handleAddProductToCart(String email, long id, HttpSession session) {
         User user = this.userService.getUserByEmail(email);
 
