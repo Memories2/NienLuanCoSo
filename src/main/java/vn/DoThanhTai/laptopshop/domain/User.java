@@ -20,6 +20,9 @@ import jakarta.validation.constraints.Size;
 @Table(name = "users") // Đặt tên bảng trong database
 public class User {
 
+
+    
+
     @Id // Đánh dấu thuộc tính id là primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Tự động tăng giá trị của id
     private long id;
@@ -53,6 +56,13 @@ public class User {
     @OneToMany(mappedBy = "user")  // Sử dụng mối quan hệ để lấy data chứ không phải tạo cột mới
     private List<Order> orders;
 
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
     public void setId(long id) {
         this.id = id;
     }

@@ -40,4 +40,10 @@ public class ItemController {
         this.productService.handleAddProductToCart(email, productId, session);
         return "redirect:/";
     }
+
+    //////////////////////////////// xem gio hang ////////////////////////////////
+    @GetMapping("/cart")
+    public String getCartPage(Model model) {
+        return "client/cart/show";
+    }
 }
