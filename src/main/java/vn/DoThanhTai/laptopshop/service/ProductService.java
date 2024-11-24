@@ -157,8 +157,8 @@ public class ProductService {
     }
 
     //////////////////////////////// oder logic ////////////////////////////////
- public void handlePlaceOrder(User user, HttpSession session, String receiverName, String receiverAddress,
-            String receiverPhone) {
+ public void handlePlaceOrder(User user, HttpSession session, String receiverName, String receiverAddress,String receiverPhone) {
+    
         Order order = new Order();
 
         // Step 1: get cart by user
@@ -170,7 +170,7 @@ public class ProductService {
                 // create oder  
                 order.setUser(user);
                 order.setReceiverName(receiverName);
-                order.setReceiverAdress(receiverAddress);
+                order.setReceiverAddress(receiverAddress);
                 order.setReceiverPhone(receiverPhone);
                 order.setStatus("PENDING");
 
@@ -199,7 +199,7 @@ public class ProductService {
                 }
 
                 this.cartRepository.deleteById(cart.getId());
-                ;
+                
             }
 
             // Step 3: update session

@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import vn.DoThanhTai.laptopshop.domain.Cart;
 import vn.DoThanhTai.laptopshop.domain.CartDetail;
+import vn.DoThanhTai.laptopshop.domain.Order;
 import vn.DoThanhTai.laptopshop.domain.Product;
 import vn.DoThanhTai.laptopshop.domain.User;
 import vn.DoThanhTai.laptopshop.service.ProductService;
@@ -122,25 +123,34 @@ public class ItemController {
 
         model.addAttribute("cartDetails", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
+        model.addAttribute("order", new Order());
 
         return "client/cart/checkout";
     }
 
     ////////////////////////////// place order ////////////////////////////////
     @PostMapping("/place-order")
-    public String handlePlaceOrder(
-            HttpServletRequest request,
-            @RequestParam("receiverName") String receiverName,
-            @RequestParam("receiverAddress") String receiverAddress,
-            @RequestParam("receiverPhone") String receiverPhone) {
+    public String handlePlaceOrder(HttpServletRequest request, @ModelAttribute("order") Order order) {
 
-        User currentuser = new User(); // null
+        // tao moi user tu session
+        User currentUser = new User(); // null
+
+        // lay session tu request
         HttpSession session = request.getSession(false);
+        
+        // lay id cua user tu session
         long id = (long) session.getAttribute("id");
-        currentuser.setId(id);
+        currentUser.setId(id); // gan id vao user
 
-        this.productService.handlePlaceOrder(currentuser, session, receiverName, receiverAddress, receiverPhone);
+        // handle place order
+        this.productService.handlePlaceOrder(currentUser, session, order.getReceiverName(), order.getReceiverAddress(), order.getReceiverPhone());
 
         return "redirect:/thanks";
+    }
+
+    ////////////////////////////// thanks ////////////////////////////////
+    @GetMapping("/thanks")
+    public String getThankYouPage(Model model) {
+        return "client/cart/thanks";
     }
 }

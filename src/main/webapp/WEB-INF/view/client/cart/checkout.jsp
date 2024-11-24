@@ -121,7 +121,7 @@
                                 </table>
                             </div>
                             <c:if test="${not empty cartDetails}">
-                                <form:form action="/place-order" method="post" modelAttribute="cart">
+                                <form:form action="/place-order" method="post" modelAttribute="order">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     <div class="mt-5 row g-4 justify-content-start">
                                         <div class="col-12 col-md-6">
@@ -131,15 +131,18 @@
                                                 <div class="row">
                                                     <div class="col-12 form-group mb-3">
                                                         <label>Tên người nhận</label>
-                                                        <input class="form-control" name="receiverName" required />
+                                                        <input class="form-control" name="receiverName" required
+                                                            path="receiverName" />
                                                     </div>
                                                     <div class="col-12 form-group mb-3">
                                                         <label>Địa chỉ người nhận</label>
-                                                        <input class="form-control" name="receiverAddress" required />
+                                                        <input class="form-control" name="receiverAddress" required
+                                                            path="receiverAddress" />
                                                     </div>
                                                     <div class="col-12 form-group mb-3">
                                                         <label>Số điện thoại</label>
-                                                        <input class="form-control" name="receiverPhone" required />
+                                                        <input class="form-control" name="receiverPhone" required
+                                                            path="receiverPhone" />
                                                     </div>
                                                     <div class="mt-4">
                                                         <i class="fas fa-arrow-left"></i>

@@ -20,7 +20,7 @@ public class Order {
 
     private String receiverName;
 
-    private String receiverAdress;
+    private String receiverAddress;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -31,7 +31,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order [id=" + id + ", receiverName=" + receiverName + ", receiverAdress=" + receiverAdress
+        return "Order [id=" + id + ", receiverName=" + receiverName + ", receiverAddress=" + receiverAddress
                 + ", receiverPhone=" + receiverPhone + ", status=" + status + ", totalPrice=" + totalPrice + "]";
     }
 
@@ -74,12 +74,12 @@ public class Order {
         this.receiverName = receiverName;
     }
 
-    public String getReceiverAdress() {
-        return receiverAdress;
+    public String getReceiverAddress() {
+        return receiverAddress;
     }
 
-    public void setReceiverAdress(String receiverAdress) {
-        this.receiverAdress = receiverAdress;
+    public void setReceiverAddress(String receiverAddress) {
+        this.receiverAddress = receiverAddress;
     }
 
     public String getReceiverPhone() {
