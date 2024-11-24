@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import jakarta.servlet.http.HttpSession;
 import vn.DoThanhTai.laptopshop.domain.Cart;
 import vn.DoThanhTai.laptopshop.domain.CartDetail;
+import vn.DoThanhTai.laptopshop.domain.Order;
+import vn.DoThanhTai.laptopshop.domain.OrderDetail;
 import vn.DoThanhTai.laptopshop.domain.Product;
 import vn.DoThanhTai.laptopshop.domain.User;
 import vn.DoThanhTai.laptopshop.repository.CartDetailRepository;
@@ -25,7 +27,6 @@ public class ProductService {
     private final UserService userService;
     private final OrderRepository oderRepository;
     private final OrderDetailRepository oderDetailRepository;
-    
 
     ProductService(ProductRepository productRepository, CartRepository cartRepository,
             CartDetailRepository cartDetailRepository, UserService userService, OrderRepository oderRepository,
@@ -60,6 +61,7 @@ public class ProductService {
         return this.cartRepository.findByUser(user);
 
     }
+
     public void handleAddProductToCart(String email, long id, HttpSession session) {
         User user = this.userService.getUserByEmail(email);
 
@@ -86,7 +88,7 @@ public class ProductService {
             if (oldDetail == null) {
                 CartDetail cd = new CartDetail();
                 cd.setCart(cart); // set cart cho cart_detail vi cart_detail phu thuoc vao cart
-                cd.setProduct(realProduct); 
+                cd.setProduct(realProduct);
                 cd.setPrice(realProduct.getPrice());
                 cd.setQuantity(1);
                 this.cartDetailRepository.save(cd);
@@ -153,4 +155,56 @@ public class ProductService {
             }
         }
     }
+
+    //////////////////////////////// oder logic ////////////////////////////////
+ public void handlePlaceOrder(User user, HttpSession session, String receiverName, String receiverAddress,
+            String receiverPhone) {
+        Order order = new Order();
+
+        // Step 1: get cart by user
+        Cart cart = this.cartRepository.findByUser(user);
+        if (cart != null) {
+            List<CartDetail> cartDetails = cart.getCartDetails();
+            if (cartDetails != null) {
+
+                // create oder  
+                order.setUser(user);
+                order.setReceiverName(receiverName);
+                order.setReceiverAdress(receiverAddress);
+                order.setReceiverPhone(receiverPhone);
+                order.setStatus("PENDING");
+
+                double sum = 0;
+                for (CartDetail cd : cartDetails) {
+                    sum += cd.getPrice()*cd.getQuantity();
+                }
+                order.setTotalPrice(sum);
+                order = this.oderRepository.save(order);
+
+
+                // create oderDetail
+                for (CartDetail cd : cartDetails) {
+
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.setOrder(order);
+                    orderDetail.setProduct(cd.getProduct());
+                    orderDetail.setPrice(cd.getPrice());
+                    orderDetail.setQuantity(cd.getQuantity());
+                    this.oderDetailRepository.save(orderDetail);
+                }
+
+                // Step 2: delete cart_detail and cart
+                for (CartDetail cd : cartDetails) {
+                    this.cartDetailRepository.deleteById(cd.getId());
+                }
+
+                this.cartRepository.deleteById(cart.getId());
+                ;
+            }
+
+            // Step 3: update session
+            session.setAttribute("sum", 0);
+        }
+    }
+
 }

@@ -126,21 +126,21 @@ public class ItemController {
         return "client/cart/checkout";
     }
 
-    //////////////////////////////// place order ////////////////////////////////
-    // @PostMapping("/place-order")
-    // public String handlePlaceOrder(
-    //         HttpServletRequest request,
-    //         @RequestParam("receiverName") String receiverName,
-    //         @RequestParam("receiverAddress") String receiverAddress,
-    //         @RequestParam("receiverPhone") String receiverPhone) {
+    ////////////////////////////// place order ////////////////////////////////
+    @PostMapping("/place-order")
+    public String handlePlaceOrder(
+            HttpServletRequest request,
+            @RequestParam("receiverName") String receiverName,
+            @RequestParam("receiverAddress") String receiverAddress,
+            @RequestParam("receiverPhone") String receiverPhone) {
 
-    //     User currentuser = new User(); // null
-    //     HttpSession session = request.getSession(false);
-    //     long id = (long) session.getAttribute("id");
-    //     currentuser.setId(id);
+        User currentuser = new User(); // null
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        currentuser.setId(id);
 
-    //     this.productService.handlePlaceOrder(currentuser, session, receiverName, receiverAddress, receiverPhone);
+        this.productService.handlePlaceOrder(currentuser, session, receiverName, receiverAddress, receiverPhone);
 
-    //     return "redirect:/thanks";
-    // }
+        return "redirect:/thanks";
+    }
 }
