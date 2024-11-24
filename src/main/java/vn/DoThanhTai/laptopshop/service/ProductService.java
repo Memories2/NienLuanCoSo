@@ -1,6 +1,7 @@
 package vn.DoThanhTai.laptopshop.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -101,6 +102,38 @@ public class ProductService {
                 this.cartDetailRepository.save(oldDetail);
             }
 
+        }
+    }
+
+    public void handleRemoveCartDetail(long cartDetailId, HttpSession session) {
+
+        // tim cart_detail theo id
+        Optional<CartDetail> cartDetailOptional = this.cartDetailRepository.findById(cartDetailId);
+        // check cart_detail co ton tai khong
+        if (cartDetailOptional.isPresent()) {
+            // lay cart_detail
+            CartDetail cartDetail = cartDetailOptional.get();
+            // lay cart cua cart_detail
+            Cart currentCart = cartDetail.getCart();
+
+            // delete CardDetail
+            this.cartDetailRepository.deleteById(cartDetailId);
+
+            // update Cart
+            if (currentCart.getSum() > 1) {
+                int s = currentCart.getSum() - 1;
+                currentCart.setSum(s);
+
+                // update cho session
+                session.setAttribute("sum", s);
+
+                // save cart
+                this.cartRepository.save(currentCart);
+            } else {
+                // dele cart sum = 1
+                this.cartRepository.deleteById(currentCart.getId());
+                session.setAttribute("sum", 0);
+            }
         }
     }
 }

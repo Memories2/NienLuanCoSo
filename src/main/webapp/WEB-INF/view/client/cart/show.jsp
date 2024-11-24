@@ -102,19 +102,23 @@
                                                 </p>
                                             </td>
                                             <td>
+                                                <!-- handle logic update quantity -->
                                                 <div class="input-group quantity mt-4" style="width: 100px;">
+                                                    <!-- handle logic minus quantity -->
                                                     <div class="input-group-btn">
                                                         <button
                                                             class="btn btn-sm btn-minus rounded-circle bg-light border">
                                                             <i class="fa fa-minus"></i>
                                                         </button>
                                                     </div>
+                                                    <!-- handle logic input quantity -->
                                                     <input type="text"
                                                         class="form-control form-control-sm text-center border-0"
                                                         value="${cartDetail.quantity}"
                                                         data-cart-detail-id="${cartDetail.id}"
                                                             data-cart-detail-price="${cartDetail.price}"
                                                             data-cart-detail-index="${status.index}">
+                                                    <!-- handle logic plus quantity -->
                                                     <div class="input-group-btn">
                                                         <button
                                                             class="btn btn-sm btn-plus rounded-circle bg-light border">
@@ -123,6 +127,7 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <!-- handle logic total price -->
                                             <td>
                                                 <p class="mb-0 mt-4" data-cart-detail-id="${cartDetail.id}">
                                                     <fmt:formatNumber type="number"
