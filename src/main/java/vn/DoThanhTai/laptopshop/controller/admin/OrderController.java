@@ -30,7 +30,7 @@ public class OrderController {
         return "admin/order/show";
     }
     ////////////////////////////// show order detail ////////////////////////////////
-    @GetMapping("/admin/order/view/{id}")
+    @GetMapping("/admin/order/detail/{id}")
     public String getOrderDetailPage(Model model, @PathVariable long id) {
         Order order = this.orderService.fetchOrderById(id).get();
         model.addAttribute("order", order);

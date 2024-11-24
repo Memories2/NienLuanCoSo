@@ -59,7 +59,7 @@
                                                         <td>${user.fullName}</td>
                                                         <td>${user.role.name}</td>
                                                         <td>
-                                                            <a href="/admin/user/view/${user.id}"
+                                                            <a href="/admin/user/detail/${user.id}"
                                                                 class="btn btn-success">View</a>
                                                             <!--Mặc định của thẻ a là method get, gửi một request cho sever -->
                                                             <a href="/admin/user/update/${user.id}"

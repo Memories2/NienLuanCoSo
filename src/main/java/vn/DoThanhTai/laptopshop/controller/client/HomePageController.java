@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import vn.DoThanhTai.laptopshop.domain.Product;
 import vn.DoThanhTai.laptopshop.domain.Role;
@@ -18,7 +20,8 @@ import vn.DoThanhTai.laptopshop.domain.User;
 import vn.DoThanhTai.laptopshop.domain.dto.RegisterDTO;
 import vn.DoThanhTai.laptopshop.service.ProductService;
 import vn.DoThanhTai.laptopshop.service.UserService;
-
+import vn.DoThanhTai.laptopshop.service.OrderService;
+import vn.DoThanhTai.laptopshop.domain.Order;
 
 
 @Controller
@@ -27,11 +30,13 @@ public class HomePageController {
     private final ProductService productService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final OrderService orderService;
 
-    public HomePageController(ProductService productService, UserService userService, PasswordEncoder passwordEncoder) {
+    public HomePageController(ProductService productService, UserService userService, PasswordEncoder passwordEncoder, OrderService orderService) {
         this.productService = productService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.orderService = orderService;
     }
 
     @GetMapping("/")
@@ -81,5 +86,23 @@ public class HomePageController {
     @GetMapping("/access-deny")
     public String getDenyPage() {
         return "client/auth/deny";
+    }
+
+    //////////////////////////////// Order history ////////////////////////////////
+    @GetMapping("/order-history")
+    public String getOrderHistoryPage(Model model, HttpServletRequest request) {
+        // tao user
+        User currentUser  = new User();
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        // set id cho user
+        currentUser .setId(id);
+
+        // lay order cua user
+        List<Order> orders = this.orderService.fetchOrderByUser(currentUser);
+        model.addAttribute("orders", orders);
+
+
+        return "client/cart/order-history";
     }
 }

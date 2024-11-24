@@ -184,13 +184,16 @@
                                                 <div style="display: none;">
                                                 <c:forEach var="cartDetail" items="${cart.cartDetails}"
                                                     varStatus="status">
+                                                    
                                                     <div class="mb-3">
+                                                        <!-- id -->
                                                         <div class="form-group">
                                                             <label>Id:</label>
                                                             <form:input class="form-control" type="text"
                                                                 value="${cartDetail.id}"
                                                                 path="cartDetails[${status.index}].id" />
                                                         </div>
+                                                        <!-- quantity -->
                                                         <div class="form-group">
                                                             <label>Quantity:</label>
                                                             <form:input class="form-control" type="text"

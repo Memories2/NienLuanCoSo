@@ -69,7 +69,7 @@
                                                         <td>${order.user.fullName}</td>
                                                         <td>${order.status}</td>
                                                         <td>
-                                                            <a href="/admin/order/view/${order.id}"
+                                                            <a href="/admin/order/detail/${order.id}"
                                                                 class="btn btn-success">View</a>
                                                             <a href="/admin/order/update/${order.id}"
                                                                 class="btn btn-warning  mx-2">Update</a>

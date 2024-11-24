@@ -73,7 +73,7 @@
                                                                     </th>
                                                                     <td>
                                                                         <p class="mb-0 mt-4">
-                                                                            <a href="/admin/product/view/${orderDetail.product.id}"
+                                                                            <a href="/admin/product/detail/${orderDetail.product.id}"
                                                                                 target="_blank">
                                                                                 ${orderDetail.product.name}
                                                                             </a>

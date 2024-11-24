@@ -8,16 +8,23 @@ import vn.DoThanhTai.laptopshop.domain.Role;
 import vn.DoThanhTai.laptopshop.domain.User;
 import vn.DoThanhTai.laptopshop.domain.dto.RegisterDTO;
 import vn.DoThanhTai.laptopshop.repository.UserRepository;
+import vn.DoThanhTai.laptopshop.repository.OrderRepository;
+import vn.DoThanhTai.laptopshop.repository.ProductRepository;
 import vn.DoThanhTai.laptopshop.repository.RoleRepository;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+    
+     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, OrderRepository orderRepository, ProductRepository productRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.orderRepository = orderRepository;
+        this.productRepository = productRepository;
     }
 
     public String getUserName() {
@@ -71,6 +78,16 @@ public class UserService {
         return this.userRepository.findByEmail(email);
     }
 
- 
+    public long countUser() {
+        return this.userRepository.count();
+    }
+
+    public long countProduct() {
+        return this.productRepository.count();
+    }
+
+    public long countOrder() {
+        return this.orderRepository.count();
+    }
 }
 

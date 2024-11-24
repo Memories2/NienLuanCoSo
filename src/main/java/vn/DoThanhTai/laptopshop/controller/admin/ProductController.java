@@ -36,7 +36,7 @@ public class ProductController {
         return "admin/product/show";
     }
     //////////////////////////////// VIEW DETAIL PRODUCT ////////////////////////////////
-    @GetMapping("/admin/product/view/{id}")
+    @GetMapping("/admin/product/detail/{id}")
     public String getDetailProduct(Model model, @PathVariable("id") long id) {
         Product product = this.productService.getProductById(id);
         model.addAttribute("product", product);

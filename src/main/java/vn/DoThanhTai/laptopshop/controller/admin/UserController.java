@@ -75,7 +75,7 @@ public class UserController {
     }
 
     ///////////////////////// View User Detail //////////////////////////
-    @GetMapping("/admin/user/view/{id}") // Get xem chi tiết một user
+    @GetMapping("/admin/user/detail/{id}") // Get xem chi tiết một user
     public String getViewUserPage(Model model, @PathVariable("id") Long id) {
         User user = this.userService.handleGetUserById(id);
         model.addAttribute("user", user);

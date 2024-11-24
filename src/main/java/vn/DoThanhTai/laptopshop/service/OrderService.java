@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import vn.DoThanhTai.laptopshop.domain.Order;
 import vn.DoThanhTai.laptopshop.domain.OrderDetail;
+import vn.DoThanhTai.laptopshop.domain.User;
 import vn.DoThanhTai.laptopshop.repository.OrderRepository;
 import vn.DoThanhTai.laptopshop.repository.OrderDetailRepository;
 
@@ -53,5 +54,9 @@ public class OrderService {
         }
         // delete order
         this.orderRepository.deleteById(id);
+    }
+
+    public List<Order> fetchOrderByUser(User user) {
+        return this.orderRepository.findByUser(user);
     }
 }
