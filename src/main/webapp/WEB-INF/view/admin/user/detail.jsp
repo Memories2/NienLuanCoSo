@@ -31,16 +31,18 @@
                                 <h1 class="mt-4">Manage Users</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Users</li>
+                                    <li class="breadcrumb-item active"><a href="/admin/user">Manage Users</a></li>
+                                    <li class="breadcrumb-item active">Detail User ${id}</li>
                                 </ol>
                                 <div class="container mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
-                                            <div class="d-flex justify-content-between">
-                                                <h3>User detail with id ${id} </h3>
-
+                                            <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded mb-3">
+                                                <h3 class="mb-0">
+                                                    <i class="fas fa-user-circle text-primary me-2"></i>
+                                                    Chi tiết người dùng #${id}
+                                                </h3>
                                             </div>
-
                                             <hr />
                                             <div class="card" style="width: 60%;">
                                                 <div class="card-header"> User information </div>
@@ -49,6 +51,7 @@
                                                     <li class="list-group-item">Email: ${user.email}</li>
                                                     <li class="list-group-item">FullName: ${user.fullName}</li>
                                                     <li class="list-group-item">Address: ${user.address}</li>
+                                                    <li class="list-group-item">Phone: ${user.phone}</li>
                                                 </ul>
                                             </div>
                                             <a href="/admin/user" class="btn btn-success mt-3 ">Back</a>
