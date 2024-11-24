@@ -136,4 +136,21 @@ public class ProductService {
             }
         }
     }
+
+    public void handleUpdateCartBeforeCheckout(List<CartDetail> cartDetails) {
+        // lặp qua từng cartDetail
+        for (CartDetail cartDetail : cartDetails) {
+            // tim cartDetail theo id tu database
+            Optional<CartDetail> cdOptional = this.cartDetailRepository.findById(cartDetail.getId());
+            // check cartDetail co ton tai trong optional khong
+            if (cdOptional.isPresent()) {
+                // lay cartDetail tu optional
+                CartDetail currentCartDetail = cdOptional.get();
+                // update quantity
+                currentCartDetail.setQuantity(cartDetail.getQuantity());
+                // save
+                this.cartDetailRepository.save(currentCartDetail);
+            }
+        }
+    }
 }
