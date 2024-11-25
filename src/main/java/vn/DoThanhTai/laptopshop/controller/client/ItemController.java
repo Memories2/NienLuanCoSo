@@ -190,10 +190,10 @@ public class ItemController {
 
         String name = nameOptional.isPresent() ? nameOptional.get() : "";
 
-        Pageable pageable = PageRequest.of(page-1, 6);
+        Pageable pageable = PageRequest.of(page-1, 60);
         Page<Product> products = this.productService.getAllProductWithSpec(pageable,name);
         List<Product> productList = products.getContent();
-
+ 
         model.addAttribute("products", productList);
 
 

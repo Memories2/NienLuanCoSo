@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
@@ -14,13 +13,13 @@ import vn.DoThanhTai.laptopshop.domain.CartDetail;
 import vn.DoThanhTai.laptopshop.domain.Order;
 import vn.DoThanhTai.laptopshop.domain.OrderDetail;
 import vn.DoThanhTai.laptopshop.domain.Product;
-import vn.DoThanhTai.laptopshop.domain.Product_;
 import vn.DoThanhTai.laptopshop.domain.User;
 import vn.DoThanhTai.laptopshop.repository.CartDetailRepository;
 import vn.DoThanhTai.laptopshop.repository.CartRepository;
 import vn.DoThanhTai.laptopshop.repository.OrderDetailRepository;
 import vn.DoThanhTai.laptopshop.repository.OrderRepository;
 import vn.DoThanhTai.laptopshop.repository.ProductRepository;
+import vn.DoThanhTai.laptopshop.service.specification.ProductSpecs;
 
 @Service
 public class ProductService {
@@ -48,12 +47,10 @@ public class ProductService {
         return product1;
     }
 
-    private Specification<Product> nameLike(String name) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME), "%" + name + "%");
-    }
+  
 
     public Page<Product> getAllProductWithSpec(Pageable page,String name) {
-        return this.productRepository.findAll(this.nameLike(name), page);
+        return this.productRepository.findAll(ProductSpecs.nameLike(name), page);
     }
 
     public Page<Product> getAllProduct(Pageable page) {
