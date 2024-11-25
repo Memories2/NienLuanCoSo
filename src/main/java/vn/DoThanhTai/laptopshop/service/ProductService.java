@@ -52,8 +52,12 @@ public class ProductService {
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME), "%" + name + "%");
     }
 
-    public Page<Product> getAllProduct(Pageable page,String name) {
+    public Page<Product> getAllProductWithSpec(Pageable page,String name) {
         return this.productRepository.findAll(this.nameLike(name), page);
+    }
+
+    public Page<Product> getAllProduct(Pageable page) {
+        return this.productRepository.findAll(page);
     }
 
    

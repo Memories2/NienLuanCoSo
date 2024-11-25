@@ -192,8 +192,9 @@ public class ItemController {
 
 
         Pageable pageable = PageRequest.of(page-1, 6);
-        Page<Product> products = this.productService.getAllProduct(pageable,name);
+        Page<Product> products = this.productService.getAllProductWithSpec(pageable,name);
         List<Product> productList = products.getContent();
+
         model.addAttribute("products", productList);
 
 
