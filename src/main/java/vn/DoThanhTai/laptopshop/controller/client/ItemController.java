@@ -188,8 +188,7 @@ public class ItemController {
             page = 1;
         }
 
-        String name = nameOptional.get();
-
+        String name = nameOptional.isPresent() ? nameOptional.get() : "";
 
         Pageable pageable = PageRequest.of(page-1, 6);
         Page<Product> products = this.productService.getAllProductWithSpec(pageable,name);
