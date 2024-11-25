@@ -51,6 +51,12 @@ public class ItemController {
         // lay san pham
         long productId = id;
         this.productService.handleAddProductToCart(email, productId, session,1);
+
+        String referer = request.getHeader("Referer");
+
+        if(referer != null && referer.contains("/products")){
+            return "redirect:/products";
+        }
         return "redirect:/";
     }
 
