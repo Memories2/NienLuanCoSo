@@ -24,6 +24,7 @@ import vn.DoThanhTai.laptopshop.domain.CartDetail;
 import vn.DoThanhTai.laptopshop.domain.Order;
 import vn.DoThanhTai.laptopshop.domain.Product;
 import vn.DoThanhTai.laptopshop.domain.User;
+import vn.DoThanhTai.laptopshop.domain.dto.ProductCriteriaDTO;
 import vn.DoThanhTai.laptopshop.service.ProductService;
 
 @Controller
@@ -177,23 +178,13 @@ public class ItemController {
 
     //////////////////////////////// show all product khi nguoi dng click vao tat ca san pham ////////////////////////////////
     @GetMapping("/products")
-    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptional,
-     @RequestParam("name") Optional<String> nameOptional,
-     @RequestParam("min-price") Optional<String> minOptional,
-     @RequestParam("max-price") Optional<String> maxOptional,
-     @RequestParam("factory") Optional<String> factoryOptional,
-     @RequestParam("target") Optional<String> targetOptional,  
-     @RequestParam("price") Optional<String> priceOptional,
-     @RequestParam("sort") Optional<String> sortOptional
-
-        
-     ) {
-        int page = 0;
+    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO) {
+             int page = 0;
         try {
-            if (pageOptional.isPresent()) {
+            if (productCriteriaDTO.getPage().isPresent()) {
                 // convert from String to int
-                page = Integer.parseInt(pageOptional.get());
-            }else{
+                page = Integer.parseInt(productCriteriaDTO.getPage().get());
+            } else {
                 page = 1;
             }
         }catch(Exception e){
@@ -202,10 +193,8 @@ public class ItemController {
 
 
         Pageable pageable = PageRequest.of(page - 1, 60);
-        //Page<Product> products = this.productService.getAllProductWithSpec(pageable,name);
 
-        String name = nameOptional.isPresent() ? nameOptional.get() : "";
-        Page<Product> products = this.productService.getAllProductWithSpec(pageable,name);
+        Page<Product> products = this.productService.getAllProduct(pageable);
             
         // case 1
         // double min = minOptional.isPresent() ? Double.parseDouble(minOptional.get())

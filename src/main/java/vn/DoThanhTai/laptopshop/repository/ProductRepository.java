@@ -23,5 +23,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
     void deleteById(long id);
 
     Page<Product> findAll(Specification<Product> spec,Pageable page);
+
+    Page<Product> findAll(Pageable page);
 }
 
