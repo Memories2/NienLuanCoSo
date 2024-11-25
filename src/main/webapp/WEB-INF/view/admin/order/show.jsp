@@ -63,8 +63,6 @@
                                                         <th>
                                                             <fmt:formatNumber type="number"
                                                                 value="${order.totalPrice}" /> đ
-
-
                                                         </th>
                                                         <td>${order.user.fullName}</td>
                                                         <td>${order.status}</td>
@@ -80,6 +78,28 @@
                                                 </c:forEach>
                                             </tbody>
                                         </table>
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination justify-content-center">
+                                                <li class="page-item">
+                                                    <a class="${currentPage == 1 ? 'disabled page-link': 'page-link'}"
+                                                        href="/admin/order?page=${currentPage-1}" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                                <c:forEach var="i" begin="1" end="${totalPages}">
+                                                    <li class="page-item">
+                                                        <a class="${i eq currentPage ? 'active page-link': 'page-link'}"
+                                                            href="/admin/order?page=${i}">${i}</a>
+                                                    </li>
+                                                </c:forEach>
+                                                <li class="page-item">
+                                                    <a class="${currentPage == totalPages ? 'disabled page-link': 'page-link'}"
+                                                        href="/admin/order?page=${currentPage+1}" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
 
