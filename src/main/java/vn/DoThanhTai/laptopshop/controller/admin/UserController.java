@@ -1,7 +1,11 @@
 package vn.DoThanhTai.laptopshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,9 +40,25 @@ public class UserController {
 
     ///////////////////////// All User View //////////////////////////
     @GetMapping("/admin/user")
-    public String getHomePage(Model model) {
-        List<User> users = this.userService.handleGetAllUsers();
-        model.addAttribute("users", users);
+    public String getUserPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page =0;
+        try{
+            if(pageOptional.isPresent()){
+                page = Integer.parseInt(pageOptional.get());
+            }else{
+                page = 1;
+            }
+        }catch(Exception e){
+            page = 1;
+        }
+
+        Pageable pageable = PageRequest.of(page-1,3);    
+        Page<User> users = this.userService.handleGetAllUsers(pageable);
+        List<User> userList = users.getContent();
+
+        model.addAttribute("users", userList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", users.getTotalPages());
         return "admin/user/show";
     }
 

@@ -1,6 +1,7 @@
 package vn.DoThanhTai.laptopshop.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,7 +34,20 @@ public class ProductController {
     //////////////////////////////// SHOW ALL PRODUCT  ////////////////////////////////
 
     @GetMapping("/admin/product")
-    public String getProduct(Model model, @RequestParam("page") int page) {
+    public String getProduct(Model model, @RequestParam("page") Optional<String> pageOptional) {
+
+        int page = 0;
+        try {
+            if (pageOptional.isPresent()) {
+                // convert from String to int
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                page = 1;
+            }
+        } catch (Exception e) {
+            page = 1;
+            // TODO: handle exception
+        }
         //
         Pageable pageable = PageRequest.of(page-1, 5);
         Page<Product> products = this.productService.getAllProduct(pageable);
