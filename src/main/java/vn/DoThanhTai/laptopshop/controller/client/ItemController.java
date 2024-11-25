@@ -176,7 +176,7 @@ public class ItemController {
 
     //////////////////////////////// show all product khi nguoi dng click vao tat ca san pham ////////////////////////////////
     @GetMapping("/products")
-    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptional, @RequestParam("name") Optional<String> nameOptional) {
         int page =0;
         try{
             if(pageOptional.isPresent()){
@@ -187,10 +187,17 @@ public class ItemController {
         }catch(Exception e){
             page = 1;
         }
+
+        String name = nameOptional.get();
+
+
         Pageable pageable = PageRequest.of(page-1, 6);
-        Page<Product> products = this.productService.getAllProduct(pageable);
+        Page<Product> products = this.productService.getAllProduct(pageable,name);
         List<Product> productList = products.getContent();
         model.addAttribute("products", productList);
+
+
+
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", products.getTotalPages());
 
