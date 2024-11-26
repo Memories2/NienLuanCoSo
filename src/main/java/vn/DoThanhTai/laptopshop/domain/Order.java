@@ -18,9 +18,15 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String receiverAddress;
+
     private String receiverName;
 
-    private String receiverAddress;
+    private String receiverPhone;
+  
+    private String status;
+
+    private double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -35,12 +41,6 @@ public class Order {
                 + ", receiverPhone=" + receiverPhone + ", status=" + status + ", totalPrice=" + totalPrice + "]";
     }
 
-    private String receiverPhone;
-    
-    private String status;
-
-
-    
 
     public User getUser() {
         return user;
@@ -106,6 +106,6 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    private double totalPrice;
+ 
 
 }
