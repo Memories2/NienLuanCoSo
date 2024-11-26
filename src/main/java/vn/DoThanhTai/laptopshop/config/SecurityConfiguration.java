@@ -82,7 +82,7 @@ public class SecurityConfiguration {
 
                 .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
 
-                 .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
+                .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login?error")
