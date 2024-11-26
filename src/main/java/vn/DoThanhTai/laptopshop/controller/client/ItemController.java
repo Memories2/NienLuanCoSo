@@ -182,7 +182,7 @@ public class ItemController {
     //////////////////////////////// show all product khi nguoi dng click vao tat ca san pham ////////////////////////////////
     @GetMapping("/products")
     public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO, HttpServletRequest request) {
-             int page = 0;
+             int page = 1;
         try {
             if (productCriteriaDTO.getPage().isPresent()) {
                 // convert from String to int
@@ -215,6 +215,7 @@ public class ItemController {
             // remove page
             qs = qs.replace("page=" + page, "");
         }
+     
         model.addAttribute("products", productList);
 
         model.addAttribute("currentPage", page);
