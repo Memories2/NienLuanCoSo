@@ -113,9 +113,17 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model, @ModelAttribute("currentUser") User currentUser) {
+    public String postUpdateUser(Model model, @ModelAttribute("currentUser") User currentUser, @RequestParam("hoidanitFile") MultipartFile file) {
         User oldUser = this.userService.handleGetUserById(currentUser.getId());
         if (oldUser != null) {
+            //upload file
+            if(file != null && !file.isEmpty()) {
+                //delete old image
+                this.uploadService.handleDeleteImage("avatar", oldUser.getAvatar());
+                //upload new image
+                String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
+                oldUser.setAvatar(avatar);
+            }
             oldUser.setFullName(currentUser.getFullName());
             oldUser.setPhone(currentUser.getPhone());
             oldUser.setAddress(currentUser.getAddress());

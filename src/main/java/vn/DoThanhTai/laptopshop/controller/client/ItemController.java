@@ -197,7 +197,7 @@ public class ItemController {
         // check sort price
         Pageable pageable = PageRequest.of(page - 1, 10);
 
- if (productCriteriaDTO.getSort() != null && productCriteriaDTO.getSort().isPresent()) {
+        if (productCriteriaDTO.getSort() != null && productCriteriaDTO.getSort().isPresent()) {
             String sort = productCriteriaDTO.getSort().get();
             if (sort.equals("gia-tang-dan")) {
                 pageable = PageRequest.of(page - 1, 10, Sort.by(Product_.PRICE).ascending());
