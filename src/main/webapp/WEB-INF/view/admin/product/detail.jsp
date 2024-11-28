@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <!DOCTYPE html>
             <html lang="en">
 
@@ -48,9 +49,13 @@
                                                 <div class="card-header"> Product information </div>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">ID: ${product.id}</li>
-                                                    <li class="list-group-item">Email: ${product.name}</li>
-                                                    <li class="list-group-item">FullName: ${product.price}</li>
-                                                    <li class="list-group-item">Address: ${product.factory}</li>
+                                                    <li class="list-group-item">name: ${product.name}</li>
+                                                    <li class="list-group-item">Price: <fmt:formatNumber type="number" value="${product.price}" />đ</li>
+                                                    <li class="list-group-item">Factory: ${product.factory}</li>
+                                                    <li class="list-group-item">Quantity: ${product.quantity}</li>
+                                                    <li class="list-group-item">Sold: ${product.sold}</li>
+                                                    <li class="list-group-item">Detail Description: ${product.detailDesc}</li>
+
                                                 </ul>
                                             </div>
                                             <a href="/admin/product" class="btn btn-success mt-3 ">Back</a>

@@ -251,9 +251,20 @@ public class ProductService {
 
                     OrderDetail orderDetail = new OrderDetail();
                     orderDetail.setOrder(order);
+
                     orderDetail.setProduct(cd.getProduct());
+                    // Điều chỉnh số lượng sản phẩm trong kho
+                    Product product = cd.getProduct();
+                    product.setQuantity(product.getQuantity() - cd.getQuantity());
+                    // update sold
+                    product.setSold(product.getSold() + cd.getQuantity());
+                    this.productRepository.save(product);
+
+                    // set price
                     orderDetail.setPrice(cd.getPrice());
+                    // set quantity
                     orderDetail.setQuantity(cd.getQuantity());
+                    // save
                     this.orderDetailRepository.save(orderDetail);
                 }
 

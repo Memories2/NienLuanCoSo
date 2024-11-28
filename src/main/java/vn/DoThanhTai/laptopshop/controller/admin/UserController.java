@@ -121,7 +121,7 @@ public class UserController {
             oldUser.setAddress(currentUser.getAddress());
             this.userService.handleUpdateUser(oldUser);
         }
-        return "redirect:/admin/user/show";
+        return "redirect:/admin/user`";
     }
 
     ///////////////////////// Delete User //////////////////////////

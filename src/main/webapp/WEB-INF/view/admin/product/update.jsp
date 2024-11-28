@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <!DOCTYPE html>
             <html lang="en">
 
@@ -92,7 +93,7 @@
 
                                                 <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Price</label>
-                                                    <form:input type="Price"
+                                                    <form:input type="number"
                                                         class="form-control ${not empty errorsPrice ? 'is-invalid':''}"
                                                         path="price" />
                                                     ${errorsPrice}

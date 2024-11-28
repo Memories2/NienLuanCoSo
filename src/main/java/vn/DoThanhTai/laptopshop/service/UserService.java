@@ -29,9 +29,6 @@ public class UserService {
         this.productRepository = productRepository;
     }
 
-    public String getUserName() {
-        return "hello";
-    }
 
     public User handleSaveUser(User user) {
         return this.userRepository.save(user);
